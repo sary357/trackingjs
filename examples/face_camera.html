@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tracking.js - face with camera</title>
+  <link rel="stylesheet" href="assets/demo.css">
+
+  <script src="../build/tracking-min.js"></script>
+  <script src="../build/data/face-min.js"></script>
+ <!--  <script src="../node_modules/dat.gui/build/dat.gui.min.js"></script> -->
+  <script src="assets/stats.min.js"></script>
+
+  <style>
+  video, canvas {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;
+  }
+  </style>
+</head>
+<body>
+  <div class="demo-title">
+    <p><a href="http://trackingjs.com" target="_parent">台北富邦銀行分行人臉辨識系統</a></p>
+  </div>
+
+  <div class="demo-frame">
+    <div class="demo-container">
+      <video id="video" width="760" height="570" preload autoplay loop muted></video>
+      <canvas id="canvas" width="760" height="570"></canvas>
+    </div>
+  </div>
+
+  <script>
+    var eyes=0;
+    var nose=10;
+    var ears=20;
+    var forehead=0;
+    var total=0;
+    function updateParameters(){
+          //eyes=Math.ceil(Math.random()*100);
+          //nose=Math.ceil(Math.random()*100);
+          //forehead=Math.ceil(Math.random()*100);
+          //ears=Math.ceil(Math.random()*100);
+          eyes=87;
+          nose=78;
+          ears=94;
+          forehead=87;
+          total=90;
+          //total=Math.ceil((eyes+nose+forehead+ears)/4);
+    }
+    updateParameters();
+    window.onload = function() {
+    //setTimeout(updateParameters, 3000);
+      var video = document.getElementById('video');
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      var img_id1=new Image();
+      img_id1.src='id/homer_simpson_id.jpg';
+      var img_id2=new Image();
+      img_id2.src='id/lin_chi_ling.png';
+      var index=1;
+      var tracker = new tracking.ObjectTracker('face');
+      tracker.setInitialScale(4);
+      tracker.setStepSize(2);
+      tracker.setEdgesDensity(0.1);
+
+      tracking.track('#video', tracker, { camera: true });
+
+      tracker.on('track', function(event) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        event.data.forEach(function(rect) {
+          var size=18;
+          context.strokeStyle = '#a64ceb';
+          context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+          context.font = '20px Helvetica';
+          context.fillStyle = "#fff";
+          context.fillText('李嘉誠' , rect.x + rect.width + 5, rect.y+8 );
+          context.font = '18px Helvetica';
+          context.fillText('年齡: 30' , rect.x + rect.width + 5, rect.y + size +8);
+         // context.font = '20px Helvetica';
+         // context.fillStyle = "#0ff";
+          context.fillText('申辦業務: 房貸', rect.x + rect.width + 5, rect.y +size*2+8);
+          context.fillText('從眼睛判斷是有錢人的機率: '+eyes+'%', rect.x + rect.width + 5, rect.y + size*3+8);
+          context.fillText('從鼻子判斷是有錢人的機率: '+nose+'%', rect.x + rect.width + 5, rect.y + size*4+8);
+          context.fillText('從耳朵判斷是有錢人的機率: '+ears+'%', rect.x + rect.width + 5, rect.y + size*5+8);
+          context.fillText('從額頭判斷是有錢人的機率: '+forehead+'%', rect.x + rect.width + 5, rect.y + size*6+8);
+          context.fillText('整體判斷是有錢人的機率: ', rect.x + rect.width + 5, rect.y + size*7+20);
+          context.fillStyle = "#f00";
+          context.font = '36px Helvetica';
+          context.fillText(total+ '%', rect.x + rect.width + 220, rect.y + size*7+20);
+          //console.log(index);
+         // if(index%2==1)
+          //   context.drawImage(img_id1, rect.x+rect.width, rect.y);
+          //else
+          //    context.drawImage(img_id2, rect.x+rect.width, rect.y);
+        });
+      });
+
+    };
+  </script>
+</body>
+</html>
