@@ -12,8 +12,8 @@
 
   <style>
   video, canvas {
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-left: 30px;
+    margin-top: 10px;
     position: absolute;
   }
   </style>
@@ -25,8 +25,8 @@
 
   <div class="demo-frame">
     <div class="demo-container">
-      <video id="video" width="760" height="570" preload autoplay loop muted></video>
-      <canvas id="canvas" width="760" height="570"></canvas>
+      <video id="video" width="740" height="555" preload autoplay loop muted></video>
+      <canvas id="canvas" width="740" height="555"></canvas>
     </div>
   </div>
 
@@ -78,22 +78,15 @@
           context.fillText('李嘉誠' , rect.x + rect.width + 5, rect.y+8 );
           context.font = '18px Helvetica';
           context.fillText('年齡: 30' , rect.x + rect.width + 5, rect.y + size +8);
-         // context.font = '20px Helvetica';
-         // context.fillStyle = "#0ff";
-          context.fillText('申辦業務: 房貸', rect.x + rect.width + 5, rect.y +size*2+8);
-          context.fillText('從眼睛判斷是有錢人的機率: '+eyes+'%', rect.x + rect.width + 5, rect.y + size*3+8);
-          context.fillText('從鼻子判斷是有錢人的機率: '+nose+'%', rect.x + rect.width + 5, rect.y + size*4+8);
-          context.fillText('從耳朵判斷是有錢人的機率: '+ears+'%', rect.x + rect.width + 5, rect.y + size*5+8);
-          context.fillText('從額頭判斷是有錢人的機率: '+forehead+'%', rect.x + rect.width + 5, rect.y + size*6+8);
-          context.fillText('整體判斷是有錢人的機率: ', rect.x + rect.width + 5, rect.y + size*7+20);
+          //context.fillText('申辦業務: 房貸', rect.x + rect.width + 5, rect.y +size*2+8);
+          context.fillText('從眼睛判斷是有錢人的機率: '+eyes+'%', rect.x + rect.width + 5, rect.y + size*2+8);
+          context.fillText('從鼻子判斷是有錢人的機率: '+nose+'%', rect.x + rect.width + 5, rect.y + size*3+8);
+          context.fillText('從耳朵判斷是有錢人的機率: '+ears+'%', rect.x + rect.width + 5, rect.y + size*4+8);
+          context.fillText('從額頭判斷是有錢人的機率: '+forehead+'%', rect.x + rect.width + 5, rect.y + size*5+8);
+          context.fillText('整體判斷是有錢人的機率: ', rect.x + rect.width + 5, rect.y + size*6+20);
           context.fillStyle = "#f00";
           context.font = '36px Helvetica';
-          context.fillText(total+ '%', rect.x + rect.width + 220, rect.y + size*7+20);
-          //console.log(index);
-         // if(index%2==1)
-          //   context.drawImage(img_id1, rect.x+rect.width, rect.y);
-          //else
-          //    context.drawImage(img_id2, rect.x+rect.width, rect.y);
+          context.fillText(total+ '%', rect.x + rect.width + 220, rect.y + size*6+20);
         });
       });
 
